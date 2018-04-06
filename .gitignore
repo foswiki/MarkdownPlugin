@@ -1,4 +1,12 @@
 *,v
 igp_*
 *.gz
+*.swp
+/MarkdownPlugin.md5
+/MarkdownPlugin.sha1
+/MarkdownPlugin.tgz
+/MarkdownPlugin.txt
+/MarkdownPlugin.zip
+/MarkdownPlugin_installer
+/MarkdownPlugin_installer.pl
 pub/System/MarkdownPlugin/styles.css
