@@ -1,0 +1,4 @@
+*,v
+igp_*
+*.gz
+pub/System/MarkdownPlugin/styles.css

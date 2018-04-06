@@ -1,0 +1,5 @@
+Text::Markdown,>=1.0,cpan,Optional
+Text::MultiMarkdown,>=1.0,cpan,Optional
+Text::Markdown::Hoedown,>=1.0,cpan,Optional
+Text::Textile,>=2.0,cpan,Optional
+pandoc,>1.12,c,Required

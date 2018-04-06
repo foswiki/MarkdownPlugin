@@ -1,0 +1,22 @@
+.markdownBody table {
+  overflow:auto;
+  border-spacing:0;
+  border-collapse:collapse;
+}
+.markdownBody table tr {
+  background-color:#fff;
+  border:1px solid #c6cbd1;
+}
+.markdownBody table th,
+.markdownBody table td {
+  padding:6px 13px;
+  border:1px solid #dfe2e5;
+}
+
+.markdownBody table tr:nth-child(2n) {
+  background-color:#f6f8fa;
+}
+.markdownBody pre code {
+  border:0;
+  background-color:transparent;
+}

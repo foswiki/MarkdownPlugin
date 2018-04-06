@@ -1,0 +1,16 @@
+!noci
+data/System/MarkdownPlugin.txt 0644
+lib/Foswiki/Plugins/MarkdownPlugin/Config.spec 0644
+lib/Foswiki/Plugins/MarkdownPlugin/Converter.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/Core.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/DEPENDENCIES 0644
+lib/Foswiki/Plugins/MarkdownPlugin/Pandoc.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/TextMarkdownHoedown.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/TextMarkdown.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/TextMultiMarkdown.pm 0644
+lib/Foswiki/Plugins/MarkdownPlugin/TextTextile.pm 0644
+pub/System/MarkdownPlugin/Makefile 0644
+pub/System/MarkdownPlugin/styles.css 0644
+pub/System/MarkdownPlugin/styles.css.gz 0644
+pub/System/MarkdownPlugin/styles.uncompressed.css 0644
