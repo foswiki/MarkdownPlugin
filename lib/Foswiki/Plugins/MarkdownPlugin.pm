@@ -20,8 +20,8 @@ use warnings;
 
 use Foswiki::Func ();
 
-our $VERSION = '0.01';
-our $RELEASE = '30 Jan 2018';
+our $VERSION = '1.00';
+our $RELEASE = '06 Apr 2018';
 our $SHORTDESCRIPTION = 'Markdown support for Foswiki';
 our $NO_PREFS_IN_TOPIC = 1;
 our $core;
