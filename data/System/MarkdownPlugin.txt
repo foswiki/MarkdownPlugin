@@ -1,4 +1,4 @@
-%META:TOPICINFO{author="ProjectContributor" comment="reprev" date="1523014172" format="1.1" version="1"}%
+%META:TOPICINFO{author="ProjectContributor" comment="" date="1523384548" format="1.1" version="1"}%
 ---+!! %TOPIC%
 %FORMFIELD{"Description"}%
 
@@ -229,6 +229,7 @@ ___
 ---++ Change History
 
 %TABLE{columnwidths="7em" tablewidth="100%"}%
+| 10 Apr 2018 | fixed syntax error in =Config.spec= |
 | 06 Apr 2018 | initial release |
 
 %META:FORM{name="PackageForm"}%
