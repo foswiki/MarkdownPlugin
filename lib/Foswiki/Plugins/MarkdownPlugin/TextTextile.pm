@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2018-2020 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@ our @ISA = ('Foswiki::Plugins::MarkdownPlugin::Converter');
 
 sub process {
   my ($this, $text, $params) = @_;
+
+  $text = $this->readAttachment($params) unless defined $text;
 
   return textile($text);
 }

@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2018-2020 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -38,6 +38,17 @@ sub finish {}
 sub process {
   my ($this, $text, $params) = @_;
   die "not implemented";
+}
+
+sub readAttachment {
+  my ($this, $params) = @_;
+
+  my $text;
+
+  $text = Foswiki::Func::readAttachment($params->{web}, $params->{topic}, $params->{attachment}, $params->{rev}) 
+    if defined $params->{attachment};
+
+  return $text;
 }
 
 1;

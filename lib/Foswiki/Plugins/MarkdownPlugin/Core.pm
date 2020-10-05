@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2018-2020 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -68,24 +68,26 @@ sub MARKDOWN {
   my ($this, $session, $params, $topic, $web) = @_;
 
   _writeDebug("called MARKDOWN()");
-  my $text;
 
+  my ($thisWeb, $thisTopic) = Foswiki::Func::normalizeWebTopicName($params->{web} || $web, $params->{topic} || $topic);
+  $params->{web} = $thisWeb;
+  $params->{topic} = $thisTopic;
+
+  my $text;
   if (defined $params->{_DEFAULT} || $params->{text}) {
     $text = $params->{_DEFAULT} || $params->{text};
-  } elsif (defined $params->{section} || defined $params->{topic}) {
-    my ($thisWeb, $thisTopic) = Foswiki::Func::normalizeWebTopicName($web, $params->{topic} || $topic);
+    $text = Foswiki::Func::decodeFormatTokens($text);
+    $text = Foswiki::Func::expandCommonVariables($text, $params->{topic}, $params->{web}) if $text =~ /%/;
+  } elsif (defined $params->{section}) {
 
-    $text = '%INCLUDE{"' . $thisWeb . '.' . $thisTopic . '"';
+    $text = '%INCLUDE{"' . $params->{web} . '.' . $params->{topic} . '"';
     $text .= ' section="' . $params->{section} . '"' if defined $params->{section};
     $text .= ' rev="' . $params->{rev} . '"' if defined $params->{rev};
     $text .= ' warn="off"}%';
 
-    $text = Foswiki::Func::expandCommonVariables($text, $topic, $web);
-  } elsif (defined $params->{attachment}) {
-    my ($thisWeb, $thisTopic) = Foswiki::Func::normalizeWebTopicName($web, $params->{topic} || $topic);
-    $text = Foswiki::Func::readAttachment($thisWeb, $thisTopic, $params->{attachment}, $params->{rev});
+    $text = Foswiki::Func::expandCommonVariables($text, $topic, $web) if $text =~ /%/;
   }
- 
+
   return $this->convert($text, $params);
 }
 
@@ -93,6 +95,15 @@ sub handleMarkdownArea {
   my ($this, $web, $topic, $text, $args) = @_;
 
   my %params = Foswiki::Func::extractParameters($args || "");
+  foreach my $key (keys %params) {
+    my $val = $params{$key};
+    $val = Foswiki::Func::decodeFormatTokens($val);
+    $params{$key} = Foswiki::Func::expandCommonVariables($val) if $val =~ /%/;
+  }
+
+  my ($thisWeb, $thisTopic) = Foswiki::Func::normalizeWebTopicName($params{web} || $web, $params{topic} || $topic);
+  $params{web} = $thisWeb;
+  $params{topic} = $thisTopic;
 
   return $this->convert($text, \%params);
 }
@@ -108,12 +119,14 @@ sub addCss {
 sub convert {
   my ($this, $text, $params) = @_;
 
-  _writeDebug("text=$text");
+  _writeDebug("called convert");
+  #_writeDebug("text=$text");
+  _writeDebug("format=".($params->{format}//''));
   my $html = $this->converter->process($text, $params); 
 
   $this->addCss();
 
-  _writeDebug("html=$html");
+  #_writeDebug("html=$html");
   return "<div class='markdownBody'><literal>$html</literal></div>";
 } 
 

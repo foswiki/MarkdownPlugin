@@ -19,8 +19,12 @@ Markdown is _not_ converted to TML. Instead, it is converted directly to HTML us
 
 When using the Pandoc converter a couple of extra formats are available as it is able to read a couple of more formats:
 
+   * commonmark
    * docbook
+   * docx
+   * epub
    * haddock
+   * html
    * json
    * latex
    * markdown
@@ -30,9 +34,15 @@ When using the Pandoc converter a couple of extra formats are available as it is
    * markdown_strict
    * mediawiki
    * native
+   * odt
    * opml
+   * org
    * rst
+   * t2t
    * textile
+   * twiki
+
+The actual list of input formats might vary depending on pandoc as installed on the Foswiki server.
 
 ---++ Usage
 Content can either be written within the topic area itself using:
@@ -65,11 +75,11 @@ The =%<nop>MARKDOWN{...}%= makro may take a couple of parameters.
 | =section="..."= | named section to extract markdown | |
 | =attachment="..."= | file name of an attachment haning off from =topic= | |
 | =rev="..."= | version of the =topic= or =attachment= to extract markdown from | latest |
-| =format="..."= | when using the Pandoc converter this option specifies one of the supported input formats that pandoc understands | markdown |
+| =format="..."= | when using the Pandoc converter this option specifies one of the supported input formats that pandoc understands | defined in ={PandocFormat}= defaulting to "markdown" |
 
 Note that =section= and =attachment= are exclusive.
 
-The =%<nop>STARTMARKDOWN%= ... =%<nop>STOPMARKDOWN%= is the sectional (or inline) variant of the =%MARKDOWN=. Alternatively 
+The =%<nop>STARTMARKDOWN{...}%= ... =%<nop>STOPMARKDOWN%= is the sectional (or inline) variant of the =%MARKDOWN=. Alternatively 
 you may write =%<nop>BEGINMARKDOWN%= ... =%<nop>ENDMARKDOWN= as well. The only parameter that makes sense here is the =format= parameter
 as markdown content is specified inline directly, i.e. not read from a named section or an attachment of course.
 
@@ -229,6 +239,9 @@ ___
 ---++ Change History
 
 %TABLE{columnwidths="7em" tablewidth="100%"}%
+| 05 Oct 2020 | added ={PandocFormat}= config parameter; \
+                fixed several problems that prevented this plugin from being used in wiki apps; \
+                fixed encoding =pandoc= results |
 | 10 Apr 2018 | fixed syntax error in =Config.spec= |
 | 06 Apr 2018 | initial release |
 
@@ -238,7 +251,7 @@ ___
 %META:FIELD{name="Release" title="Release" value="%25$RELEASE%25"}%
 %META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
 %META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/%25TOPIC%25"}%
-%META:FIELD{name="Copyright" title="Copyright" value="2018 Michael Daum http://michaeldaumconsulting.com"}%
+%META:FIELD{name="Copyright" title="Copyright" value="2018-2020 Michael Daum"}%
 %META:FIELD{name="License" title="License" value="GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]])"}%
 %META:FIELD{name="Home" title="Home" value="https://foswiki.org/Extensions/%25TOPIC%25"}%
 %META:FIELD{name="Support" title="Support" value="https://foswiki.org/Support/%25TOPIC%25"}%
