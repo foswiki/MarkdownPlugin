@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018-2020 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2018-2022 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,6 +18,7 @@ package Foswiki::Plugins::MarkdownPlugin::Core;
 use strict;
 use warnings;
 use Foswiki::Func ();
+use Foswiki::Contrib::CacheContrib ();
 
 use constant TRACE => 0; # toggle me
 
@@ -73,15 +74,25 @@ sub MARKDOWN {
   $params->{web} = $thisWeb;
   $params->{topic} = $thisTopic;
 
-  my $text;
-  if (defined $params->{_DEFAULT} || $params->{text}) {
-    $text = $params->{_DEFAULT} || $params->{text};
+  my $text = $params->{_DEFAULT} || $params->{text};
+  my $url = $params->{url};
+  my $section = $params->{section};
+
+  if (defined $text) {
     $text = Foswiki::Func::decodeFormatTokens($text);
     $text = Foswiki::Func::expandCommonVariables($text, $params->{topic}, $params->{web}) if $text =~ /%/;
-  } elsif (defined $params->{section}) {
+  } elsif (defined $url) {
+    my $response = Foswiki::Contrib::CacheContrib::getExternalResource($url);
+
+    return _inlineError("Error fetching $url: ".$response->code." - ".$response->status_line)
+      unless $response->is_success;
+
+    $text = $response->decoded_content();
+
+  } elsif (defined $section) {
 
     $text = '%INCLUDE{"' . $params->{web} . '.' . $params->{topic} . '"';
-    $text .= ' section="' . $params->{section} . '"' if defined $params->{section};
+    $text .= ' section="' . $params->{section} . '"' if $section;
     $text .= ' rev="' . $params->{rev} . '"' if defined $params->{rev};
     $text .= ' warn="off"}%';
 
@@ -129,5 +140,9 @@ sub convert {
   #_writeDebug("html=$html");
   return "<div class='markdownBody'><literal>$html</literal></div>";
 } 
+
+sub _inlineError {
+  return "<span class='foswikiAlert'>".$_[0]."</span>";
+}
 
 1;

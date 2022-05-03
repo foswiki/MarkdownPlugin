@@ -74,10 +74,11 @@ The =%<nop>MARKDOWN{...}%= makro may take a couple of parameters.
 | =topic="...="= | the topic from where to read a markdown =attachment= or =section= | current topic |
 | =section="..."= | named section to extract markdown | |
 | =attachment="..."= | file name of an attachment haning off from =topic= | |
+| =url="..."= | url from which to fetch markdown text | |
 | =rev="..."= | version of the =topic= or =attachment= to extract markdown from | latest |
 | =format="..."= | when using the Pandoc converter this option specifies one of the supported input formats that pandoc understands | defined in ={PandocFormat}= defaulting to "markdown" |
 
-Note that =section= and =attachment= are exclusive.
+Note that =section=, =url= and =attachment= are exclusive.
 
 The =%<nop>STARTMARKDOWN{...}%= ... =%<nop>STOPMARKDOWN%= is the sectional (or inline) variant of the =%MARKDOWN=. Alternatively 
 you may write =%<nop>BEGINMARKDOWN%= ... =%<nop>ENDMARKDOWN= as well. The only parameter that makes sense here is the =format= parameter
@@ -239,11 +240,13 @@ ___
 ---++ Change History
 
 %TABLE{columnwidths="7em" tablewidth="100%"}%
-| 05 Oct 2020 | added ={PandocFormat}= config parameter; \
-                fixed several problems that prevented this plugin from being used in wiki apps; \
-                fixed encoding =pandoc= results |
-| 10 Apr 2018 | fixed syntax error in =Config.spec= |
-| 06 Apr 2018 | initial release |
+|  03 May 2022 | improve performance by using Foswiki:Extensions/CacheContrib talking to external markdown renderers |
+|  06 Oct 2020 | added =url= param |
+|  05 Oct 2020 | added ={PandocFormat}= config parameter; \
+                 fixed several problems that prevented this plugin from being used in wiki apps; \
+                 fixed encoding =pandoc= results |
+|  10 Apr 2018 | fixed syntax error in =Config.spec= |
+|  06 Apr 2018 | initial release |
 
 %META:FORM{name="PackageForm"}%
 %META:FIELD{name="Author" title="Author" value="Michael Daum"}%
@@ -251,7 +254,7 @@ ___
 %META:FIELD{name="Release" title="Release" value="%25$RELEASE%25"}%
 %META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
 %META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/%25TOPIC%25"}%
-%META:FIELD{name="Copyright" title="Copyright" value="2018-2020 Michael Daum"}%
+%META:FIELD{name="Copyright" title="Copyright" value="2018-2022 Michael Daum"}%
 %META:FIELD{name="License" title="License" value="GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]])"}%
 %META:FIELD{name="Home" title="Home" value="https://foswiki.org/Extensions/%25TOPIC%25"}%
 %META:FIELD{name="Support" title="Support" value="https://foswiki.org/Support/%25TOPIC%25"}%
