@@ -2,7 +2,7 @@
 # ---++ MarkdownPlugin
 # This is the configuration used by the <b>MarkdownPlugin</b>.
 
-# **SELECT Pandoc,Text::Markdown,Text::MultiMarkdown,Text::Markdown::Hoedown,Text::Textile**
+# **SELECT Pandoc,Parse::BBCode,Text::MultiMarkdown,Text::Markdown,Text::Markup,Text::Markdown::Hoedown,Text::Textile**
 $Foswiki::cfg{MarkdownPlugin}{Converter} = 'Text::Markdown';
 
 # **COMMAND CHECK='undefok' DISPLAY_IF="{MarkdownPlugin}{Converter}=='Pandoc'"**

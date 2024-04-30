@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018-2024 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2023-2024 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -13,11 +13,11 @@
 # GNU General Public License for more details, published at
 # http://www.gnu.org/copyleft/gpl.html
 
-package Foswiki::Plugins::MarkdownPlugin::TextMultiMarkdown;
+package Foswiki::Plugins::MarkdownPlugin::ParseBBCode;
 
 use strict;
 use warnings;
-use Text::MultiMarkdown qw(markdown);
+use Parse::BBCode ();
 
 use Foswiki::Plugins::MarkdownPlugin::Converter ();
 our @ISA = ('Foswiki::Plugins::MarkdownPlugin::Converter');
@@ -27,7 +27,27 @@ sub process {
 
   $text = $this->readAttachment($params) unless defined $text;
 
-  return markdown($text);
+  return $this->getParser->render($text);
+}
+
+sub getParser {
+  my $this = shift;
+
+  unless ($this->{_parser}) {
+    $this->{_parser} = Parse::BBCode->new({
+      tags => {
+        Parse::BBCode::HTML->defaults,
+      }
+    });
+  }
+
+  return $this->{_parser};
+}
+
+sub finish {
+  my $this = shift;
+
+  undef $this->{_parser};
 }
 
 1;

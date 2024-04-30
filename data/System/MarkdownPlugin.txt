@@ -240,6 +240,7 @@ ___
 ---++ Change History
 
 %TABLE{columnwidths="7em" tablewidth="100%"}%
+|  30 Apr 2024 | added support for Text::Markup and Parse::BBCode |
 |  03 May 2022 | improve performance by using Foswiki:Extensions/CacheContrib talking to external markdown renderers |
 |  06 Oct 2020 | added =url= param |
 |  05 Oct 2020 | added ={PandocFormat}= config parameter; \
@@ -254,7 +255,7 @@ ___
 %META:FIELD{name="Release" title="Release" value="%25$RELEASE%25"}%
 %META:FIELD{name="Description" title="Description" value="%25$SHORTDESCRIPTION%25"}%
 %META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/%25TOPIC%25"}%
-%META:FIELD{name="Copyright" title="Copyright" value="2018-2022 Michael Daum"}%
+%META:FIELD{name="Copyright" title="Copyright" value="2018-2024 Michael Daum"}%
 %META:FIELD{name="License" title="License" value="GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]])"}%
 %META:FIELD{name="Home" title="Home" value="https://foswiki.org/Extensions/%25TOPIC%25"}%
 %META:FIELD{name="Support" title="Support" value="https://foswiki.org/Support/%25TOPIC%25"}%

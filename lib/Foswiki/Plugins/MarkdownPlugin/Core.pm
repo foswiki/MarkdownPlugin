@@ -1,6 +1,6 @@
 # Plugin for Foswiki - The Free and Open Source Wiki, https://foswiki.org/
 #
-# MarkdownPlugin is Copyright (C) 2018-2022 Michael Daum http://michaeldaumconsulting.com
+# MarkdownPlugin is Copyright (C) 2018-2024 Michael Daum http://michaeldaumconsulting.com
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -133,7 +133,7 @@ sub convert {
   _writeDebug("called convert");
   #_writeDebug("text=$text");
   _writeDebug("format=".($params->{format}//''));
-  my $html = $this->converter->process($text, $params); 
+  my $html = $this->converter->process($text, $params) // ''; 
 
   $this->addCss();
 

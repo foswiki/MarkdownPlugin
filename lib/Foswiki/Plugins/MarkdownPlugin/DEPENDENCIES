@@ -1,5 +1,7 @@
 Foswiki::Contrib::CacheContrib,>=0,perl,Required
 Text::Markdown,>=1.0,cpan,Optional
+Text::Markup,>=0,cpan,Optional
+Parse::BBCode,>=0,cpan,Optional
 Text::MultiMarkdown,>=1.0,cpan,Optional
 Text::Markdown::Hoedown,>=1.0,cpan,Optional
 Text::Textile,>=2.0,cpan,Optional
