@@ -20,7 +20,7 @@ use warnings;
 
 use Foswiki::Func ();
 
-our $VERSION = '3.00';
+our $VERSION = '4.00';
 our $RELEASE = '%$RELEASE%';
 our $SHORTDESCRIPTION = 'Markdown support for Foswiki';
 our $LICENSECODE = '%$LICENSECODE%';
